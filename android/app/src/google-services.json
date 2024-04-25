@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "914404506297",
+    "project_id": "wearable-project-d194a",
+    "storage_bucket": "wearable-project-d194a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:914404506297:android:6e8587446039857b15f968",
+        "android_client_info": {
+          "package_name": "com.example.smartwatch_connect"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "914404506297-bnu703cbt29c7hsso8qm5t0vee0kbgn3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.smartwatch_connect",
+            "certificate_hash": "9a65b291a2bd4e4cf04b2d7e080ba346e1354f7c"
+          }
+        },
+        {
+          "client_id": "914404506297-0ofjvntdbnqvff1mgrcuc2enj1jhhhnu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5vEYdTw4kCdH04-zqVSscrEUJC4vAVDc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "914404506297-0ofjvntdbnqvff1mgrcuc2enj1jhhhnu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

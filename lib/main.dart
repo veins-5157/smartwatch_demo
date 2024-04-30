@@ -8,9 +8,7 @@ import 'package:health/health.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:carp_serializable/carp_serializable.dart';
 
-void main()  {
-  
-  
+void main() {
   runApp(HealthApp());
 }
 
@@ -39,28 +37,19 @@ class _HealthAppState extends State<HealthApp> {
   AppState _state = AppState.DATA_NOT_FETCHED;
   int _nofSteps = 0;
 
-  
-
   // All types available depending on platform (iOS ot Android).
-  List<HealthDataType> get types => (Platform.isAndroid)?dataTypeKeysAndroid
-
+  /*List<HealthDataType> get types => (Platform.isAndroid)
+      ? dataTypeKeysAndroid
       : (Platform.isIOS)
           ? dataTypeKeysIOS
-          : [];
-     
-      
+          : [];*/
+
   // // Or specify specific types
-  // static final types = [
-  //   HealthDataType.WEIGHT,
-  //   HealthDataType.STEPS,
-  //   HealthDataType.HEIGHT,
-  //   HealthDataType.BLOOD_GLUCOSE,
-  //   HealthDataType.WORKOUT,
-  //   HealthDataType.BLOOD_PRESSURE_DIASTOLIC,
-  //   HealthDataType.BLOOD_PRESSURE_SYSTOLIC,
-  //   // Uncomment this line on iOS - only available on iOS
-  //   // HealthDataType.AUDIOGRAM
-  // ];
+  static final types = [
+    //   HealthDataType.WEIGHT,
+    HealthDataType.STEPS,
+    HealthDataType.BLOOD_GLUCOSE
+  ];
 
   // Set up corresponding permissions
   // READ only
@@ -92,12 +81,12 @@ class _HealthAppState extends State<HealthApp> {
     // The location permission is requested for Workouts using the Distance information.
     await Permission.activityRecognition.request();
     await Permission.location.request();
-print('1--${await Permission.activityRecognition.request()}' );
-print('2---${await Permission.location.status}');
+    print('1--${await Permission.activityRecognition.request()}');
+    print('2---${await Permission.location.status}');
     // Check if we have health permissions
     bool? hasPermissions =
         await Health().hasPermissions(types, permissions: permissions);
-print('${await Health().hasPermissions(types, permissions: permissions)}');
+    print('${await Health().hasPermissions(types, permissions: permissions)}');
     // hasPermissions = false because the hasPermission cannot disclose if WRITE access exists.
     // Hence, we have to request with WRITE as well.
     hasPermissions = false;
@@ -108,8 +97,8 @@ print('${await Health().hasPermissions(types, permissions: permissions)}');
       try {
         authorized = await Health()
             .requestAuthorization(types, permissions: permissions);
-            print("${ await Health()
-            .requestAuthorization(types, permissions: permissions)}");
+        print(
+            "${await Health().requestAuthorization(types, permissions: permissions)}");
       } catch (error) {
         debugPrint("Exception in authorize: $error");
       }

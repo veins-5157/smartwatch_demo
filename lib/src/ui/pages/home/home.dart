@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Health Kit Demo')),
+      appBar: AppBar(title: const Text('Health Connect')),
            body:Column(
              children: [Container(
                padding: EdgeInsets.all(16),

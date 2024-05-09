@@ -46,9 +46,12 @@ class _HealthAppState extends State<HealthApp> {
 
   // // Or specify specific types
   static final types = [
-    //   HealthDataType.WEIGHT,
-    HealthDataType.STEPS,
-    HealthDataType.BLOOD_GLUCOSE
+    HealthDataType.HEART_RATE,
+    // HealthDataType.STEPS,
+    /*
+    HealthDataType.BODY_TEMPERATURE,
+     HealthDataType.DISTANCE_DELTA,
+    HealthDataType.STEPS*/
   ];
 
   // Set up corresponding permissions
@@ -90,7 +93,6 @@ class _HealthAppState extends State<HealthApp> {
     // hasPermissions = false because the hasPermission cannot disclose if WRITE access exists.
     // Hence, we have to request with WRITE as well.
     hasPermissions = false;
-
     bool authorized = false;
     if (!hasPermissions) {
       // requesting access to the data types before reading them
@@ -103,9 +105,8 @@ class _HealthAppState extends State<HealthApp> {
         debugPrint("Exception in authorize: $error");
       }
     }
-
-    setState(() => _state =
-        (authorized) ? AppState.AUTHORIZED : AppState.AUTH_NOT_GRANTED);
+    /*setState(() => _state =
+        (authorized) ? AppState.AUTHORIZED : AppState.AUTH_NOT_GRANTED);*/
   }
 
   /// Gets the Health Connect status on Android.
@@ -122,15 +123,12 @@ class _HealthAppState extends State<HealthApp> {
 
   /// Fetch data points from the health plugin and show them in the app.
   Future<void> fetchData() async {
-    setState(() => _state = AppState.FETCHING_DATA);
-
+     // setState(() => _state = AppState.FETCHING_DATA);
     // get data within the last 24 hours
     final now = DateTime.now();
     final yesterday = now.subtract(Duration(hours: 24));
-
     // Clear old data points
-    _healthDataList.clear();
-
+    // _healthDataList.clear();
     // try {
     // fetch health data
     List<HealthDataPoint> healthData = await Health().getHealthDataFromTypes(
@@ -138,22 +136,17 @@ class _HealthAppState extends State<HealthApp> {
       startTime: yesterday,
       endTime: now,
     );
-
     debugPrint('Total number of data points: ${healthData.length}. '
         '${healthData.length > 100 ? 'Only showing the first 100.' : ''}');
-
     // save all the new data points (only the first 100)
     _healthDataList.addAll(
         (healthData.length < 100) ? healthData : healthData.sublist(0, 100));
     // } catch (error) {
     //   debugPrint("Exception in getHealthDataFromTypes: $error");
     // }
-
     // filter out duplicates
     _healthDataList = Health().removeDuplicates(_healthDataList);
-
-    _healthDataList.forEach((data) => debugPrint(toJsonString(data)));
-
+    // _healthDataList.forEach((data) => debugPrint(toJsonString(data)));
     // update the UI to display the results
     setState(() {
       _state = _healthDataList.isEmpty ? AppState.NO_DATA : AppState.DATA_READY;
@@ -377,13 +370,13 @@ class _HealthAppState extends State<HealthApp> {
                           backgroundColor:
                               MaterialStatePropertyAll(Colors.blue))),
                   if (Platform.isAndroid)
-                    TextButton(
+                    /*TextButton(
                         onPressed: getHealthConnectSdkStatus,
                         child: Text("Check Health Connect Status",
                             style: TextStyle(color: Colors.white)),
                         style: ButtonStyle(
                             backgroundColor:
-                                MaterialStatePropertyAll(Colors.blue))),
+                                MaterialStatePropertyAll(Colors.blue))),*/
                   TextButton(
                       onPressed: fetchData,
                       child: Text("Fetch Data",
@@ -391,7 +384,7 @@ class _HealthAppState extends State<HealthApp> {
                       style: ButtonStyle(
                           backgroundColor:
                               MaterialStatePropertyAll(Colors.blue))),
-                  TextButton(
+                  /*TextButton(
                       onPressed: addData,
                       child: Text("Add Data",
                           style: TextStyle(color: Colors.white)),
@@ -426,7 +419,7 @@ class _HealthAppState extends State<HealthApp> {
                             style: TextStyle(color: Colors.white)),
                         style: ButtonStyle(
                             backgroundColor:
-                                MaterialStatePropertyAll(Colors.blue))),
+                                MaterialStatePropertyAll(Colors.blue))),*/
                 ],
               ),
               Divider(thickness: 3),
